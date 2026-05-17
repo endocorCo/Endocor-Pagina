@@ -297,7 +297,7 @@
     /* Logo mark above the brand name */
     .hero-logo-wrap {
       display: flex; justify-content: center; align-items: center;
-      margin-bottom: clamp(20px, 3vw, 32px);
+      margin-bottom: clamp(-24px, -2.5vw, -10px); /* negative pulls wordmark up into logo */
       opacity: 0; transform: translateY(14px);
       animation: riseIn .9s var(--ease) .3s forwards;
     }
@@ -320,6 +320,7 @@
       opacity: 0; transform: translateY(18px);
       animation: riseIn 1s var(--ease) .5s forwards;
     }
+    .hero-brand em { color: var(--sage); font-style: normal; }
 
     .hero-divider {
       width: 0; height: 1px;
@@ -771,7 +772,7 @@
 
   <!-- NAV -->
   <nav class="nav" id="nav" aria-label="Navegación principal">
-    <a href="#" class="nav-logo" aria-label="ENDOCOR — Inicio">ENDOC<em>OR</em></a>
+    <a href="#" class="nav-logo" aria-label="ENDOCOR — Inicio">ENDOC<em>O</em>R</a>
     <ul class="nav-links" role="list">
       <li><a href="#about">Nosotros</a></li>
       <li><a href="#services">Servicios</a></li>
@@ -811,7 +812,7 @@
         >
       </div>
 
-      <h1 class="hero-brand">ENDOCOR</h1>
+      <h1 class="hero-brand">ENDOC<em>O</em>R</h1>
       <div class="hero-divider" aria-hidden="true"></div>
       <p class="hero-title">Diseño Web Premium y Presencia Digital Moderna</p>
       <p class="hero-sub">Experiencias digitales que comunican distinción, confianza y valor desde el primer instante.</p>
@@ -1106,7 +1107,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
-        <a href="#" class="footer-logo" aria-label="ENDOCOR — Volver al inicio">ENDOC<em>OR</em></a>
+        <a href="#" class="footer-logo" aria-label="ENDOCOR — Volver al inicio">ENDOC<em>O</em>R</a>
         <p class="footer-copy">© 2025 ENDOCOR. Todos los derechos reservados.</p>
         <ul class="footer-links" role="list">
           <li><a href="#about">Nosotros</a></li>
