@@ -290,21 +290,21 @@
     /* Hero content */
     .hero-content {
       position: relative; z-index: 10; text-align: center;
-      padding: 0 clamp(20px, 5vw, 48px);
-      width: 100%; max-width: 860px;
+      padding: clamp(40px, 8vh, 80px) clamp(20px, 5vw, 48px) 0;
+      width: 100%; max-width: 960px;
     }
 
     /* Logo mark above the brand name */
     .hero-logo-wrap {
       display: flex; justify-content: center; align-items: center;
-      margin-bottom: clamp(24px, 4vw, 36px);
+      margin-bottom: clamp(20px, 3vw, 32px);
       opacity: 0; transform: translateY(14px);
       animation: riseIn .9s var(--ease) .3s forwards;
     }
     .hero-logo-img {
-      height: clamp(180px, 30vw, 420px);
+      height: clamp(220px, 38vw, 560px);
       width: auto;
-      max-width: min(88%, 560px);
+      max-width: min(90%, 640px);
       object-fit: contain;
       display: block;
       mix-blend-mode: multiply;
@@ -313,7 +313,7 @@
 
     .hero-brand {
       font-family: var(--font-d);
-      font-size: clamp(2.2rem, 8vw, 6.4rem);
+      font-size: clamp(1.6rem, 4.5vw, 4rem);
       letter-spacing: clamp(.06em, 1.5vw, .14em);
       line-height: 1.05; color: var(--navy);
       display: block; width: 100%; text-align: center;
