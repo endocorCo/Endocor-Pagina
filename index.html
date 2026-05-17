@@ -302,12 +302,11 @@
       animation: riseIn .9s var(--ease) .3s forwards;
     }
     .hero-logo-img {
-      height: clamp(160px, 26vw, 280px);
+      height: clamp(180px, 30vw, 420px);
       width: auto;
+      max-width: min(88%, 560px);
       object-fit: contain;
       display: block;
-      /* multiply: white pixels vanish on white bg, dark logo mark stays crisp.
-         Works with transparent PNGs too — just renders as-is. */
       mix-blend-mode: multiply;
       image-rendering: -webkit-optimize-contrast;
     }
