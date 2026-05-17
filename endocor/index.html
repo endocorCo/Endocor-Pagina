@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>ENDOCOR — Premium Digital Studio</title>
+  <meta name="description" content="Estudio digital premium enfocado en diseño web de alto nivel, presencia digital estratégica y experiencias visuales que elevan tu marca.">
+  <meta name="keywords" content="diseño web, agencia digital, landing pages, SEO, presencia digital, ENDOCOR">
+  <meta name="author" content="ENDOCOR">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ENDOCOR — Premium Digital Studio">
+  <meta property="og:description" content="Diseño web premium y presencia digital moderna. Experiencias que comunican distinción desde el primer instante.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://endocor.vercel.app">
+
+  <!-- Fonts: Google Fonts CDN — no local files needed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =====================================================
+       LOADER
+  ===================================================== -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-word">
+        <span>E</span><span>N</span><span>D</span><span>O</span><span>C</span><span>O</span><span>R</span>
+      </div>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- Noise overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Custom cursor -->
+  <div class="c-dot" id="cDot"></div>
+  <div class="c-ring" id="cRing"></div>
+
+  <!-- =====================================================
+       NAV
+  ===================================================== -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">ENDOC<em>OR</em></a>
+    <ul class="nav-links">
+      <li><a href="#about">Nosotros</a></li>
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#portfolio">Portafolio</a></li>
+      <li><a href="#why">Enfoque</a></li>
+      <li><a href="#contact" class="btn-nav"><span>Iniciar Proyecto</span></a></li>
+    </ul>
+    <div class="nav-ham" id="navHam">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- =====================================================
+       HERO
+  ===================================================== -->
+  <section class="hero" id="hero">
+    <canvas id="heroCanvas"></canvas>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Estudio Digital Premium</div>
+      <div class="hero-brand">ENDOCOR</div>
+      <div class="hero-divider"></div>
+      <h1 class="hero-title">Diseño Web Premium y Presencia Digital Moderna</h1>
+      <p class="hero-sub">Experiencias digitales que comunican distinción, confianza y valor desde el primer instante.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary"><span>Iniciar Proyecto</span></a>
+        <a href="#portfolio" class="btn-outline">Ver Portafolio</a>
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      <div class="scroll-cue-line"></div>
+      <span class="scroll-cue-txt">Scroll</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       TICKER
+  ===================================================== -->
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <!-- =====================================================
+       ABOUT
+  ===================================================== -->
+  <section class="section-pad" id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Philosophy panel -->
+        <div class="philosophy-panel rev d1">
+          <div class="philosophy-grid">
+
+            <div class="philosophy-item">
+              <svg class="phi-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor"
+                   stroke-width="1.4" stroke-linecap="round">
+                <rect x="2" y="2" width="14" height="14" rx="1.5"/>
+                <line x1="6" y1="9" x2="12" y2="9"/>
+                <line x1="9" y1="6" x2="9"  y2="12"/>
+              </svg>
+              <div class="phi-title">Diseño Estratégico</div>
+              <div class="phi-desc">Cada decisión visual tiene un propósito claro y un impacto directo en tu negocio.</div>
+            </div>
+
+            <div class="philosophy-item">
+              <svg class="phi-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor"
+                   stroke-width="1.4" stroke-linecap="round">
+                <polygon points="9,2 16,6.5 16,11.5 9,16 2,11.5 2,6.5"/>
+                <circle cx="9" cy="9" r="2.5"/>
+              </svg>
+              <div class="phi-title">Tecnología Moderna</div>
+              <div class="phi-desc">Código limpio, rápido y construido sobre estándares actuales que escalan con tu marca.</div>
+            </div>
+
+            <div class="philosophy-item">
+              <svg class="phi-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor"
+                   stroke-width="1.4" stroke-linecap="round">
+                <rect x="1" y="4" width="16" height="11" rx="1.5"/>
+                <line x1="5"  y1="4" x2="5"  y2="15"/>
+                <line x1="13" y1="4" x2="13" y2="15"/>
+                <line x1="1"  y1="9" x2="17" y2="9"/>
+              </svg>
+              <div class="phi-title">Presencia Premium</div>
+              <div class="phi-desc">Sitios que comunican confianza y distinción desde los primeros segundos de contacto.</div>
+            </div>
+
+            <div class="philosophy-item">
+              <svg class="phi-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor"
+                   stroke-width="1.4" stroke-linecap="round">
+                <polyline points="2,13 6,8 9.5,11 14,4"/>
+                <circle cx="14" cy="4" r="1.5" fill="currentColor" stroke="none"/>
+              </svg>
+              <div class="phi-title">Enfoque Refinado</div>
+              <div class="phi-desc">Composición precisa, tipografía calibrada y jerarquía visual que guía sin esfuerzo.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- About text -->
+        <div class="about-text">
+          <div class="rev">
+            <div class="tag">Sobre Nosotros</div>
+            <h2 class="h2">Creamos experiencias que <em>definen marcas</em></h2>
+          </div>
+          <div class="rev d2">
+            <p>Somos <strong>ENDOCOR</strong>, un estudio digital enfocado en diseño web de alto nivel, presencia digital estratégica y experiencias visuales que elevan el nivel de cualquier negocio.</p>
+            <p>Cada proyecto es tratado con atención real: combinamos estética contemporánea con tecnología moderna para resultados que van más allá de lo convencional.</p>
+            <p>No hacemos sitios genéricos. Creamos presencias digitales que generan <strong>confianza, impacto y conversión</strong>.</p>
+          </div>
+          <div class="rev d3" style="margin-top:10px">
+            <a href="#contact" class="btn-primary" style="display:inline-flex"><span>Trabajemos Juntos</span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- =====================================================
+       SERVICES
+  ===================================================== -->
+  <section class="section-pad" id="services">
+    <div class="container">
+
+      <div class="srv-header">
+        <div class="rev"><div class="tag" style="justify-content:center">Lo Que Hacemos</div></div>
+        <h2 class="h2 rev" style="text-align:center">Servicios de <em>Alto Nivel</em></h2>
+      </div>
+
+      <div class="srv-grid">
+
+        <!-- 01 -->
+        <div class="srv-card rev d1">
+          <div class="srv-n">01</div>
+          <svg class="srv-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="7" width="40" height="30" rx="2"/>
+            <line x1="4" y1="17" x2="44" y2="17"/>
+            <circle cx="11" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+            <circle cx="17" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+            <line x1="24" y1="37" x2="24" y2="44"/>
+            <line x1="14" y1="44" x2="34" y2="44"/>
+          </svg>
+          <h3 class="srv-title">Diseño Web</h3>
+          <p class="srv-desc">Sitios web únicos, rápidos y modernos que convierten visitantes en clientes. Diseño hecho a medida para tu marca y objetivos específicos.</p>
+        </div>
+
+        <!-- 02 -->
+        <div class="srv-card rev d2">
+          <div class="srv-n">02</div>
+          <svg class="srv-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 8h32v4l-4 4 4 4v20H8V24l4-4-4-4V8z"/>
+            <line x1="16" y1="28" x2="32" y2="28"/>
+            <line x1="16" y1="34" x2="26" y2="34"/>
+          </svg>
+          <h3 class="srv-title">Landing Pages</h3>
+          <p class="srv-desc">Páginas de aterrizaje optimizadas para conversión con diseño de alto impacto que guía al usuario hacia la acción decisiva.</p>
+        </div>
+
+        <!-- 03 -->
+        <div class="srv-card rev d3">
+          <div class="srv-n">03</div>
+          <svg class="srv-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="16"/>
+            <ellipse cx="24" cy="24" rx="7" ry="16"/>
+            <line x1="8" y1="24" x2="40" y2="24"/>
+            <path d="M11.5 15a28 28 0 0025 0M11.5 33a28 28 0 0025 0"/>
+          </svg>
+          <h3 class="srv-title">Presencia Digital</h3>
+          <p class="srv-desc">Estrategia de presencia online integral: coherencia visual, identidad de marca y posicionamiento que construye confianza duradera.</p>
+        </div>
+
+        <!-- 04 -->
+        <div class="srv-card rev d4">
+          <div class="srv-n">04</div>
+          <svg class="srv-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="14"/>
+            <circle cx="24" cy="24" r="5"/>
+            <line x1="24" y1="4"  x2="24" y2="10"/>
+            <line x1="24" y1="38" x2="24" y2="44"/>
+            <line x1="4"  y1="24" x2="10" y2="24"/>
+            <line x1="38" y1="24" x2="44" y2="24"/>
+          </svg>
+          <h3 class="srv-title">SEO Optimization</h3>
+          <p class="srv-desc">Posicionamiento estratégico en Google. Más visibilidad, tráfico orgánico calificado y clientes para tu negocio de forma sostenida.</p>
+        </div>
+
+        <!-- 05 -->
+        <div class="srv-card rev d5">
+          <div class="srv-n">05</div>
+          <svg class="srv-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 8h24a4 4 0 014 4v20a4 4 0 01-4 4H12a4 4 0 01-4-4V12a4 4 0 014-4z"/>
+            <line x1="8"  y1="28" x2="40" y2="28"/>
+            <path d="M19 36l-3 6h16l-3-6"/>
+            <line x1="14" y1="44" x2="34" y2="44"/>
+          </svg>
+          <h3 class="srv-title">Hosting y Dominio</h3>
+          <p class="srv-desc">Tu sitio siempre activo, seguro y veloz. Gestionamos hosting y dominio para que no te preocupes por ningún detalle técnico.</p>
+        </div>
+
+        <!-- 06 -->
+        <div class="srv-card rev d6">
+          <div class="srv-n">06</div>
+          <svg class="srv-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 4l18 8v12c0 10.5-8 18.5-18 20C14 42.5 6 34.5 6 24V12l18-8z"/>
+            <polyline points="15,22 21,28 33,15"/>
+          </svg>
+          <h3 class="srv-title">Mantenimiento Web</h3>
+          <p class="srv-desc">Tu presencia digital siempre actualizada. Actualizaciones, monitoreo continuo y soporte técnico dedicado para tu sitio.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- =====================================================
+       PORTFOLIO
+  ===================================================== -->
+  <section class="section-pad" id="portfolio">
+    <div class="container">
+      <div class="port-header">
+        <div>
+          <div class="rev"><div class="tag">Nuestro Trabajo</div></div>
+          <h2 class="h2 rev">Portafolio</h2>
+        </div>
+        <div class="rev d2">
+          <a href="#contact" class="btn-outline">Iniciar un Proyecto</a>
+        </div>
+      </div>
+      <!-- Portfolio cards are injected by script.js -->
+      <div class="port-grid" id="portGrid"></div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- =====================================================
+       WHY ENDOCOR
+  ===================================================== -->
+  <section class="section-pad" id="why">
+    <div class="container">
+      <div class="why-grid">
+
+        <div>
+          <div class="rev">
+            <div class="tag">Nuestro Enfoque</div>
+            <h2 class="h2">Lo que nos hace <em>diferentes</em></h2>
+          </div>
+          <div class="why-list">
+
+            <div class="why-item rev d1">
+              <span class="why-n">01</span>
+              <div class="why-body">
+                <h3>Diseño de Alta Gama</h3>
+                <p>Cada pixel importa. Interfaces que combinan belleza y funcionalidad con un estándar que no encontrarás en agencias convencionales.</p>
+              </div>
+            </div>
+
+            <div class="why-item rev d2">
+              <span class="why-n">02</span>
+              <div class="why-body">
+                <h3>Desarrollo Moderno</h3>
+                <p>Código limpio, sitios rápidos y tecnología actual. Funcionamiento impecable en cualquier dispositivo y navegador, sin excepciones.</p>
+              </div>
+            </div>
+
+            <div class="why-item rev d3">
+              <span class="why-n">03</span>
+              <div class="why-body">
+                <h3>Experiencia Responsive</h3>
+                <p>Diseño que se adapta con precisión a móviles, tablets y escritorios. Tu marca siempre impecable sin importar el contexto.</p>
+              </div>
+            </div>
+
+            <div class="why-item rev d4">
+              <span class="why-n">04</span>
+              <div class="why-body">
+                <h3>Visión Estratégica</h3>
+                <p>Más que estética: construimos presencias que conectan con tu audiencia y refuerzan el valor de tu marca en el largo plazo.</p>
+              </div>
+            </div>
+
+            <div class="why-item rev d5">
+              <span class="why-n">05</span>
+              <div class="why-body">
+                <h3>Resultados Concretos</h3>
+                <p>Cada decisión tiene un propósito de negocio. Sitios que no solo se ven bien, sino que generan confianza y conversión real.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="why-sticky rev d3">
+          <div class="why-card">
+            <div class="why-card-bg"></div>
+            <div class="why-quote">
+              "Creemos que el diseño premium no es un lujo — es una
+              <em>inversión estratégica</em> que separa a las marcas que perduran del resto."
+            </div>
+            <div class="why-meta">— ENDOCOR STUDIO</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- =====================================================
+       CONTACT
+  ===================================================== -->
+  <section class="section-pad-lg" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+
+        <div class="rev">
+          <div class="tag" style="justify-content:center;margin-bottom:22px">Hablemos</div>
+          <h2 class="contact-h">¿Listo para<em>Empezar?</em></h2>
+          <p class="contact-sub">
+            Cuéntanos sobre tu proyecto y te respondemos en menos de 24 horas.<br>
+            Sin compromisos — solo resultados bien pensados.
+          </p>
+        </div>
+
+        <div class="contact-grid rev d2">
+
+          <a href="https://wa.me/5256180209" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg class="contact-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M24 4C13 4 4 13 4 24c0 3.7 1 7.2 2.8 10.2L4 44l10.1-2.7C17 42.9 20.4 44 24 44c11 0 20-9 20-20S35 4 24 4z"/>
+              <path d="M17 20.5c.5 1 1.6 2.6 2.6 3.6 1 1 2.6 2.1 3.6 2.6.5.24 1.5.5 2-.5l.5-1c.25-.5.75-.75 1.5-.5 1 .25 2.5 1.5 3 2 .5.5.5 1.25-.25 2.25l-.75.75c-.75.75-1.75 1-2.75.75C25 29.75 20.25 25 19.5 23c-.25-1 0-2 .75-2.75l.75-.75c1-1 1.75-.5 2.5.5"/>
+            </svg>
+            <span class="contact-lbl">WhatsApp</span>
+            <span class="contact-val">55 6180 2093</span>
+          </a>
+
+          <a href="https://wa.me/5256174471" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg class="contact-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M24 4C13 4 4 13 4 24c0 3.7 1 7.2 2.8 10.2L4 44l10.1-2.7C17 42.9 20.4 44 24 44c11 0 20-9 20-20S35 4 24 4z"/>
+              <path d="M17 20.5c.5 1 1.6 2.6 2.6 3.6 1 1 2.6 2.1 3.6 2.6.5.24 1.5.5 2-.5l.5-1c.25-.5.75-.75 1.5-.5 1 .25 2.5 1.5 3 2 .5.5.5 1.25-.25 2.25l-.75.75c-.75.75-1.75 1-2.75.75C25 29.75 20.25 25 19.5 23c-.25-1 0-2 .75-2.75l.75-.75c1-1 1.75-.5 2.5.5"/>
+            </svg>
+            <span class="contact-lbl">WhatsApp</span>
+            <span class="contact-val">55 6174 4710</span>
+          </a>
+
+          <a href="mailto:endocor.co@gmail.com" class="contact-card">
+            <svg class="contact-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="12" width="38" height="26" rx="2"/>
+              <polyline points="5,14 24,29 43,14"/>
+            </svg>
+            <span class="contact-lbl">Email</span>
+            <span class="contact-val">endocor.co@gmail.com</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#" class="footer-logo">ENDOC<em>OR</em></a>
+        <p class="footer-copy">© 2025 ENDOCOR. Todos los derechos reservados.</p>
+        <ul class="footer-links">
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#services">Servicios</a></li>
+          <li><a href="#portfolio">Portafolio</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script — deferred so DOM is ready -->
+  <script src="script.js" defer></script>
+</body>
+</html>
