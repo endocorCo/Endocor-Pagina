@@ -1329,6 +1329,7 @@
       /* — Project card — */
       const card = document.createElement('div');
       card.className = `port-card rev ${delay}`;
+      card.dataset.url = proj.url;
 
       /* Use thum.io to generate a real screenshot of the site.
          No API key needed — works for any public URL. */
@@ -1350,6 +1351,16 @@
       portGrid.appendChild(card);
       revObs.observe(card);
     });
+
+    /* Tap anywhere on card to open site — mobile only */
+    if (window.matchMedia('(hover: none)').matches) {
+      document.querySelectorAll('.port-card[data-url]').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+          window.open(card.dataset.url, '_blank', 'noopener,noreferrer');
+        });
+      });
+    }
   </script>
 </body>
 </html>
