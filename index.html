@@ -899,6 +899,10 @@
       .srv-grid { grid-template-columns: 1fr; }
       .port-grid { grid-template-columns: 1fr; }
       .port-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .port-header-right { flex-direction: row; align-items: center; gap: 16px; }
+      .port-stat { display: none; }
+      .port-info { padding: 11px 16px; }
+      .port-info-cat { display: none; }
       .contact-grid { flex-direction: column; align-items: stretch; }
       .contact-card  { max-width: 100%; min-width: unset; }
       .footer-inner  { flex-direction: column; gap: 18px; text-align: center; }
@@ -927,6 +931,9 @@
       .contact-sub br { display: none; }
       .contact-h { font-size: clamp(1.7rem, 7vw, 2.4rem); }
       .footer-links { gap: 14px; }
+      .port-info-name { font-size: .65rem; }
+      .port-hover { padding: 20px; }
+      .port-slot { aspect-ratio: 16/8; }
     }
 
     @media (max-width: 360px) {
@@ -1596,13 +1603,16 @@
 
       /* -- Scroll parallax + fade -- */
       if (!lessMotion && scrollLyr) {
+        const isMobile = window.innerWidth < 768;
+        const shift    = isMobile ? 22 : 44;
+        const fadeRate = isMobile ? 2.4 : 1.9;
         let raf = null;
         window.addEventListener('scroll', () => {
           if (raf) return;
           raf = requestAnimationFrame(() => {
             const p = Math.min(window.scrollY / window.innerHeight, 1);
-            scrollLyr.style.transform = `translateY(${(p * 44).toFixed(1)}px)`;
-            scrollLyr.style.opacity   = Math.max(0, 1 - p * 1.9).toFixed(3);
+            scrollLyr.style.transform = `translateY(${(p * shift).toFixed(1)}px)`;
+            scrollLyr.style.opacity   = Math.max(0, 1 - p * fadeRate).toFixed(3);
             raf = null;
           });
         }, { passive: true });
