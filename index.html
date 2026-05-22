@@ -31,6 +31,17 @@
       --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* ── Type scale — 1.22× ratio, editorial density ── */
+      --t-2xs:  .5625rem;   /*  9px  Michroma indices / ornamental     */
+      --t-xs:   .6875rem;   /* 11px  Michroma card labels / Outfit meta */
+      --t-sm:   .8125rem;   /* 13px  Outfit secondary body              */
+      --t-base: .9375rem;   /* 15px  Outfit primary body                */
+      --t-lead: 1.0625rem;  /* 17px  Outfit lead / subtitles            */
+      /* ── Line heights ── */
+      --lh-tight: 1.1;    /* display headings  */
+      --lh-snug:  1.45;   /* labels & captions */
+      --lh-body:  1.72;   /* secondary body    */
+      --lh-loose: 1.82;   /* primary body      */
       --sat: env(safe-area-inset-top,    0px);
       --sar: env(safe-area-inset-right,  0px);
       --sab: env(safe-area-inset-bottom, 0px);
@@ -169,6 +180,7 @@
       font-family: var(--font-d); font-size: 1.05rem;
       letter-spacing: .32em; color: var(--navy);
       flex-shrink: 0; line-height: 1;
+      font-kerning: normal;
     }
     .nav-logo em { color: var(--sage); font-style: normal; }
 
@@ -338,10 +350,11 @@
 
     .hero-brand {
       font-family: var(--font-d);
-      font-size: clamp(1.6rem, 4.5vw, 4rem);
+      font-size: clamp(2rem, 4.5vw, 4rem);
       letter-spacing: clamp(.18em, 2vw, .32em); /* wide tracking = luxury */
-      line-height: 1.05; color: var(--navy);
+      line-height: var(--lh-tight); color: var(--navy);
       display: block; width: 100%; text-align: center;
+      font-kerning: normal;
       opacity: 0; transform: translateY(18px);
       animation: riseIn 1s var(--ease) .5s forwards;
     }
@@ -403,17 +416,17 @@
     @media (hover: none) { .hero-spotlight { display: none; } }
 
     .hero-title {
-      font-size: clamp(.88rem, 1.8vw, 1.1rem);
+      font-size: clamp(var(--t-base), 1.6vw, var(--t-lead));
       font-weight: 300; color: var(--steel);
-      max-width: 480px; margin: 0 auto 10px;
-      letter-spacing: .07em; line-height: 1.8;
+      max-width: 52ch; margin: 0 auto 10px;
+      letter-spacing: .07em; line-height: var(--lh-loose);
       opacity: 0; transform: translateY(14px);
       animation: riseIn .8s var(--ease) .95s forwards;
     }
     .hero-sub {
-      font-size: clamp(.76rem, 1.4vw, .83rem);
-      color: var(--mist); max-width: 380px; margin: 0 auto 48px;
-      line-height: 1.9; letter-spacing: .04em;
+      font-size: clamp(var(--t-sm), 1.2vw, var(--t-base));
+      color: var(--mist); max-width: 44ch; margin: 0 auto 48px;
+      line-height: 1.85; letter-spacing: .04em;
       opacity: 0; transform: translateY(12px);
       animation: riseIn .8s var(--ease) 1.15s forwards;
     }
@@ -529,16 +542,18 @@
 
     .tag {
       display: inline-flex; align-items: center; gap: 12px;
-      font-size: .61rem; font-weight: 500; letter-spacing: .46em; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 18px;
+      font-size: var(--t-xs); font-weight: 500; letter-spacing: .38em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 20px;
     }
     .tag::before { content: ''; width: 22px; height: 1px; background: var(--sage-l); flex-shrink: 0; }
 
     .h2 {
       font-family: var(--font-d);
-      font-size: clamp(1.6rem, 3vw, 2.85rem);
-      letter-spacing: .07em; line-height: 1.15;
-      color: var(--navy); margin-bottom: 18px;
+      font-size: clamp(1.75rem, 3.2vw, 2.85rem);
+      letter-spacing: .07em; line-height: var(--lh-tight);
+      color: var(--navy); margin-bottom: 22px;
+      text-wrap: balance;
+      font-kerning: normal;
     }
     .h2 em { color: var(--sage); font-style: normal; }
 
@@ -579,10 +594,10 @@
     .philosophy-item:hover { background: rgba(163,177,138,.05); }
 
     .phi-icon  { width: 16px; height: 16px; color: var(--sage); margin-bottom: 12px; }
-    .phi-title { font-family: var(--font-d); font-size: .67rem; letter-spacing: .1em; color: var(--navy); margin-bottom: 7px; }
-    .phi-desc  { font-size: .76rem; color: var(--steel); line-height: 1.65; }
+    .phi-title { font-family: var(--font-d); font-size: var(--t-xs); letter-spacing: .1em; color: var(--navy); margin-bottom: 8px; font-kerning: normal; }
+    .phi-desc  { font-size: var(--t-sm); color: var(--steel); line-height: var(--lh-body); }
 
-    .about-text p { font-size: .93rem; color: var(--steel); line-height: 1.85; margin-bottom: 20px; font-weight: 300; }
+    .about-text p { font-size: var(--t-base); color: var(--steel); line-height: var(--lh-loose); margin-bottom: 26px; font-weight: 300; max-width: 62ch; }
     .about-text strong { color: var(--navy); font-weight: 500; }
 
     /* ======================================================
@@ -616,11 +631,12 @@
     .srv-icon { width: 36px; height: 36px; color: var(--sage); margin-bottom: 20px; transition: transform .35s var(--ease); }
     .srv-card:hover .srv-icon { transform: scale(1.08); }
     .srv-title {
-      font-family: var(--font-d); font-size: .8rem; letter-spacing: .1em; color: var(--navy);
-      margin-bottom: 11px; transition: color .3s; position: relative; z-index: 1;
+      font-family: var(--font-d); font-size: var(--t-sm); letter-spacing: .1em; color: var(--navy);
+      margin-bottom: 12px; transition: color .3s; position: relative; z-index: 1;
+      font-kerning: normal;
     }
     .srv-card:hover .srv-title { color: var(--sage); }
-    .srv-desc { font-size: .79rem; color: var(--steel); line-height: 1.72; font-weight: 300; position: relative; z-index: 1; }
+    .srv-desc { font-size: var(--t-sm); color: var(--steel); line-height: var(--lh-body); font-weight: 300; position: relative; z-index: 1; }
 
     /* ======================================================
        PORTFOLIO
@@ -855,9 +871,9 @@
     .why-item { padding: 23px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 18px; }
     .why-item:last-child { border-bottom: none; }
     .why-n { font-family: var(--font-d); font-size: .53rem; letter-spacing: .26em; color: var(--sage); min-width: 22px; padding-top: 3px; flex-shrink: 0; }
-    .why-body h3 { font-family: var(--font-d); font-size: .77rem; letter-spacing: .1em; color: var(--navy); margin-bottom: 7px; transition: color .3s; }
+    .why-body h3 { font-family: var(--font-d); font-size: var(--t-sm); letter-spacing: .1em; color: var(--navy); margin-bottom: 8px; transition: color .3s; font-kerning: normal; }
     .why-item:hover .why-body h3 { color: var(--sage); }
-    .why-body p { font-size: .78rem; color: var(--steel); line-height: 1.72; }
+    .why-body p { font-size: var(--t-sm); color: var(--steel); line-height: var(--lh-body); }
 
     .why-sticky { position: sticky; top: 120px; }
     .why-card {
@@ -872,9 +888,10 @@
       background: linear-gradient(90deg, transparent, var(--sage-l), transparent); opacity: .5;
     }
     .why-quote {
-      font-family: var(--font-d); font-size: clamp(.88rem, 1.8vw, 1.04rem);
-      letter-spacing: .05em; line-height: 1.65; color: #F8FAFC;
-      margin-bottom: 30px; position: relative; z-index: 1;
+      font-family: var(--font-d); font-size: clamp(var(--t-base), 1.8vw, 1.12rem);
+      letter-spacing: .05em; line-height: 1.58; color: #F8FAFC;
+      margin-bottom: 32px; position: relative; z-index: 1;
+      text-wrap: balance; font-kerning: normal;
     }
     .why-quote em { color: var(--sage-l); font-style: normal; }
     .why-meta { font-size: .63rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(167,176,184,.7); position: relative; z-index: 1; }
@@ -885,10 +902,11 @@
     .contact-inner { max-width: 820px; margin: 0 auto; text-align: center; }
     .contact-h {
       font-family: var(--font-d); font-size: clamp(1.8rem, 4.2vw, 4rem);
-      letter-spacing: .09em; line-height: 1.12; color: var(--navy); margin-bottom: 16px;
+      letter-spacing: .09em; line-height: var(--lh-tight); color: var(--navy); margin-bottom: 20px;
+      text-wrap: balance; font-kerning: normal;
     }
     .contact-h em { display: block; color: var(--sage); font-style: normal; }
-    .contact-sub { font-size: .9rem; color: var(--steel); margin-bottom: 52px; line-height: 1.75; }
+    .contact-sub { font-size: var(--t-base); color: var(--steel); margin: 0 auto 52px; line-height: var(--lh-loose); max-width: 58ch; }
 
     .contact-grid { display: flex; justify-content: center; gap: 2px; flex-wrap: wrap; }
     .contact-card {
@@ -982,7 +1000,7 @@
       .philosophy-item  { padding: 18px 12px; }
       .srv-card  { padding: 30px 20px; }
       .why-card  { padding: 26px 22px; }
-      .why-quote { font-size: .88rem; }
+      .why-quote { font-size: var(--t-base); }
       .contact-sub br { display: none; }
       .contact-h { font-size: clamp(1.7rem, 7vw, 2.4rem); }
       .footer-links { gap: 14px; }
