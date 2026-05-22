@@ -253,51 +253,74 @@
     .hero {
       position: relative;
       height: 100vh; height: 100dvh;
-      min-height: 580px;
+      min-height: 600px;
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden; background: var(--bg);
+      overflow: hidden;
+      /* Radial gradient: pure white at center fades to soft bg at edges — adds depth */
+      background: radial-gradient(ellipse 100% 80% at 50% 42%, #FFFFFF 0%, var(--bg) 52%, #EDF1F5 100%);
     }
+
+    /* Subtle vignette edge shadow for cinematic depth */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 50%, transparent 55%, rgba(27,35,43,.028) 100%);
+    }
+
+    /* Corner accent marks — luxury framing device */
+    .hero-corner {
+      position: absolute; width: 36px; height: 36px;
+      border-color: rgba(141,166,122,.22); border-style: solid;
+      z-index: 2; pointer-events: none;
+      opacity: 0; animation: riseIn .6s var(--ease) 1.8s forwards;
+    }
+    .hero-corner-tl { top: clamp(20px,5vh,52px); left: clamp(20px,4vw,52px); border-width: 1px 0 0 1px; }
+    .hero-corner-tr { top: clamp(20px,5vh,52px); right: clamp(20px,4vw,52px); border-width: 1px 1px 0 0; }
+    .hero-corner-bl { bottom: clamp(20px,5vh,52px); left: clamp(20px,4vw,52px); border-width: 0 0 1px 1px; }
+    .hero-corner-br { bottom: clamp(20px,5vh,52px); right: clamp(20px,4vw,52px); border-width: 0 1px 1px 0; }
+
     #heroCanvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-    .orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
     .orb-1 {
-      width: clamp(280px,50vw,560px); height: clamp(280px,50vw,560px);
-      background: radial-gradient(circle, rgba(163,177,138,.09) 0%, transparent 65%);
-      top: -200px; right: -60px; animation: o1 16s ease-in-out infinite;
+      width: clamp(300px,52vw,620px); height: clamp(300px,52vw,620px);
+      background: radial-gradient(circle, rgba(163,177,138,.11) 0%, transparent 60%);
+      top: -180px; right: -80px; animation: o1 16s ease-in-out infinite;
     }
     .orb-2 {
-      width: clamp(200px,35vw,400px); height: clamp(200px,35vw,400px);
-      background: radial-gradient(circle, rgba(230,220,198,.14) 0%, transparent 65%);
-      bottom: -100px; left: -30px; animation: o2 20s ease-in-out infinite;
+      width: clamp(220px,36vw,440px); height: clamp(220px,36vw,440px);
+      background: radial-gradient(circle, rgba(230,220,198,.16) 0%, transparent 60%);
+      bottom: -80px; left: -40px; animation: o2 20s ease-in-out infinite;
     }
     .orb-3 {
-      width: clamp(250px,45vw,500px); height: clamp(250px,45vw,500px);
-      background: radial-gradient(circle, rgba(163,177,138,.06) 0%, transparent 65%);
-      top: 38%; left: 50%; transform: translateX(-50%);
+      width: clamp(280px,48vw,560px); height: clamp(280px,48vw,560px);
+      background: radial-gradient(circle, rgba(163,177,138,.07) 0%, transparent 60%);
+      top: 36%; left: 50%; transform: translateX(-50%);
       animation: o3 13s ease-in-out infinite;
     }
     @keyframes o1 {
       0%,100%{transform:translate(0,0)}
-      45%{transform:translate(-20px,14px) scale(1.04)}
-      70%{transform:translate(10px,-8px) scale(.97)}
+      45%{transform:translate(-22px,16px) scale(1.05)}
+      70%{transform:translate(12px,-10px) scale(.96)}
     }
-    @keyframes o2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(26px,-18px)} }
+    @keyframes o2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(28px,-20px)} }
     @keyframes o3 {
-      0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}
-      50%{opacity:1;transform:translateX(-50%) scale(1.1)}
+      0%,100%{opacity:.5;transform:translateX(-50%) scale(1)}
+      50%{opacity:.9;transform:translateX(-50%) scale(1.1)}
     }
 
     /* Hero content */
     .hero-content {
       position: relative; z-index: 10; text-align: center;
-      padding: clamp(40px, 8vh, 80px) clamp(20px, 5vw, 48px) 0;
+      padding: clamp(32px, 6vh, 64px) clamp(20px, 5vw, 48px) 0;
       width: 100%; max-width: 960px;
     }
 
-    /* Logo mark above the brand name */
+    /* Logo mark */
     .hero-logo-wrap {
       display: flex; justify-content: center; align-items: center;
-      margin-bottom: clamp(-24px, -2.5vw, -10px); /* negative pulls wordmark up into logo */
+      margin-bottom: clamp(-28px, -3vw, -12px);
       opacity: 0; transform: translateY(14px);
       animation: riseIn .9s var(--ease) .3s forwards;
     }
@@ -314,7 +337,7 @@
     .hero-brand {
       font-family: var(--font-d);
       font-size: clamp(1.6rem, 4.5vw, 4rem);
-      letter-spacing: clamp(.06em, 1.5vw, .14em);
+      letter-spacing: clamp(.18em, 2vw, .32em); /* wide tracking = luxury */
       line-height: 1.05; color: var(--navy);
       display: block; width: 100%; text-align: center;
       opacity: 0; transform: translateY(18px);
@@ -322,42 +345,68 @@
     }
     .hero-brand em { color: var(--sage); font-style: normal; }
 
+    /* Refined divider — wider, double-line feel */
     .hero-divider {
+      position: relative;
       width: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(141,166,122,.5), transparent);
-      margin: 18px auto 22px;
-      animation: lineGrow .9s var(--ease) 1s forwards;
+      background: linear-gradient(90deg, transparent 0%, rgba(141,166,122,.25) 20%, rgba(141,166,122,.65) 50%, rgba(141,166,122,.25) 80%, transparent 100%);
+      margin: 22px auto 26px;
+      animation: lineGrow 1s var(--ease) 1s forwards;
     }
-    @keyframes lineGrow { to { width: clamp(120px, 20vw, 200px); } }
+    /* Sage dot centered on the divider */
+    .hero-divider::after {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--sage); opacity: .7;
+    }
+    @keyframes lineGrow { to { width: clamp(180px, 28vw, 340px); } }
 
     .hero-title {
-      font-size: clamp(.86rem, 1.8vw, 1.1rem);
-      font-weight: 400; color: var(--steel);
-      max-width: 500px; margin: 0 auto 10px;
-      letter-spacing: .03em; line-height: 1.72;
+      font-size: clamp(.88rem, 1.8vw, 1.1rem);
+      font-weight: 300; color: var(--steel);
+      max-width: 480px; margin: 0 auto 10px;
+      letter-spacing: .07em; line-height: 1.8;
       opacity: 0; transform: translateY(14px);
-      animation: riseIn .8s var(--ease) .9s forwards;
+      animation: riseIn .8s var(--ease) .95s forwards;
     }
     .hero-sub {
-      font-size: clamp(.78rem, 1.5vw, .85rem);
-      color: var(--mist); max-width: 400px; margin: 0 auto 42px;
-      line-height: 1.82;
+      font-size: clamp(.76rem, 1.4vw, .83rem);
+      color: var(--mist); max-width: 380px; margin: 0 auto 48px;
+      line-height: 1.9; letter-spacing: .04em;
       opacity: 0; transform: translateY(12px);
-      animation: riseIn .8s var(--ease) 1.1s forwards;
+      animation: riseIn .8s var(--ease) 1.15s forwards;
     }
     .hero-cta {
       display: flex; align-items: center; justify-content: center;
-      gap: 12px; flex-wrap: wrap;
+      gap: 16px; flex-wrap: wrap;
       opacity: 0; transform: translateY(10px);
-      animation: riseIn .8s var(--ease) 1.3s forwards;
+      animation: riseIn .8s var(--ease) 1.35s forwards;
     }
     @keyframes riseIn { to { opacity: 1; transform: translateY(0); } }
+
+    /* Bottom metadata strip — grounds the hero cinematically */
+    .hero-meta {
+      position: absolute; bottom: clamp(28px, 5vh, 48px);
+      left: 0; right: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+      opacity: 0; animation: riseIn .7s ease 2s forwards;
+    }
+    .hero-meta-item {
+      font-size: .55rem; letter-spacing: .38em; text-transform: uppercase;
+      color: var(--mist); font-family: var(--font-b); font-weight: 400;
+    }
+    .hero-meta-sep {
+      width: 1px; height: 10px;
+      background: var(--border-m); flex-shrink: 0;
+    }
 
     /* ---- Buttons ---- */
     .btn-primary {
       display: inline-flex; align-items: center; justify-content: center;
-      min-height: 48px;
-      padding: 13px 36px; background: var(--navy); color: var(--bg);
+      min-height: 50px;
+      padding: 14px 44px; background: var(--navy); color: var(--bg);
       font-family: var(--font-b);
       font-size: .77rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;
       position: relative; overflow: hidden;
@@ -376,8 +425,8 @@
 
     .btn-outline {
       display: inline-flex; align-items: center; justify-content: center;
-      min-height: 48px;
-      padding: 13px 36px; border: 1px solid var(--border-m); color: var(--petrol);
+      min-height: 50px;
+      padding: 14px 44px; border: 1px solid var(--border-m); color: var(--petrol);
       font-family: var(--font-b);
       font-size: .77rem; font-weight: 400; letter-spacing: .13em; text-transform: uppercase;
       transition: border-color .3s, color .3s, transform .15s;
@@ -715,6 +764,9 @@
       .section-pad    { padding: 68px 0; }
       .section-pad-lg { padding: 80px 0; }
       .hero-brand { letter-spacing: .06em; }
+      .hero-corner { width: 22px; height: 22px; }
+      .hero-meta { gap: 12px; }
+      .hero-meta-item { font-size: .5rem; letter-spacing: .28em; }
       .philosophy-panel { padding: 22px 18px; }
       .philosophy-item  { padding: 18px 12px; }
       .srv-card  { padding: 30px 20px; }
@@ -734,9 +786,10 @@
 
     @media (max-height: 500px) and (orientation: landscape) {
       .hero { min-height: 100dvh; }
-      .hero-logo-wrap { margin-bottom: 16px; }
-      .hero-logo-img  { height: 36px; }
+      .hero-logo-wrap { margin-bottom: 0; }
+      .hero-logo-img  { height: 80px; }
       .hero-sub { margin-bottom: 24px; }
+      .hero-corner, .hero-meta { display: none; }
     }
 
     @media (hover: none) {
@@ -801,8 +854,13 @@
     <div class="orb orb-2" aria-hidden="true"></div>
     <div class="orb orb-3" aria-hidden="true"></div>
 
+    <!-- Corner accent marks -->
+    <div class="hero-corner hero-corner-tl" aria-hidden="true"></div>
+    <div class="hero-corner hero-corner-tr" aria-hidden="true"></div>
+    <div class="hero-corner hero-corner-bl" aria-hidden="true"></div>
+    <div class="hero-corner hero-corner-br" aria-hidden="true"></div>
+
     <div class="hero-content">
-      <!-- Logo mark — shows the "E" symbol above the brand name -->
       <div class="hero-logo-wrap">
         <img
           src="./logo.png"
@@ -820,6 +878,15 @@
         <a href="#contact" class="btn-primary"><span>Iniciar Proyecto</span></a>
         <a href="#portfolio" class="btn-outline">Ver Portafolio</a>
       </div>
+    </div>
+
+    <!-- Cinematic metadata strip -->
+    <div class="hero-meta" aria-hidden="true">
+      <span class="hero-meta-item">México</span>
+      <span class="hero-meta-sep"></span>
+      <span class="hero-meta-item">Diseño Digital</span>
+      <span class="hero-meta-sep"></span>
+      <span class="hero-meta-item">Est. 2024</span>
     </div>
   </section>
 
