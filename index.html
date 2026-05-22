@@ -1089,6 +1089,47 @@
       .philosophy-item:hover .phi-icon { transform: none; }
       .ticker:hover .ticker-track { animation-play-state: running; opacity: 1; }
     }
+
+    /* ======================================================
+       DELIGHT
+    ====================================================== */
+
+    /* Text selection — discovered when reading, never announced */
+    ::selection { background: rgba(141,166,122,.15); color: var(--navy); }
+
+    /* Scroll progress — 1px precision instrument at viewport top */
+    .scroll-prog {
+      position: fixed; top: 0; left: 0; height: 1px; z-index: 10002;
+      background: var(--sage); width: 0%; pointer-events: none; opacity: .72;
+    }
+
+    /* Service card number — follows card hover color shift */
+    .srv-n { transition: color .3s; }
+    .srv-card:hover .srv-n { color: var(--sage); }
+
+    /* Nav active section — current section link holds the underline */
+    .nav-links a.nav-active { color: var(--navy); }
+    .nav-links a.nav-active::after { width: 100%; }
+
+    /* Why-card — large ghosted typographic backdrop, mirrors the opening quote */
+    .why-card::before {
+      content: '"';
+      position: absolute; top: 8px; right: 24px;
+      font-family: var(--font-d); font-size: 7.5rem; line-height: 1;
+      color: rgba(163,177,138,.055);
+      pointer-events: none; z-index: 0;
+      user-select: none; -webkit-user-select: none;
+    }
+
+    /* Button press — crisp tactile scale on click */
+    .btn-primary:active, .btn-outline:active {
+      transform: scale(.972);
+      transition: transform .07s ease;
+    }
+    .contact-card:active {
+      transform: translateY(-1px) scale(.988);
+      transition: transform .07s ease;
+    }
   </style>
 </head>
 <body>
@@ -1103,6 +1144,7 @@
     </div>
   </div>
 
+  <div class="scroll-prog" id="scrollProg" aria-hidden="true"></div>
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="c-dot"  id="cDot"  aria-hidden="true"></div>
   <div class="c-ring" id="cRing" aria-hidden="true"></div>
@@ -1849,6 +1891,92 @@
           setTimeout(() => { btn.style.transition = ''; }, 550);
         });
       });
+    })();
+
+    /* =========================================================
+       SCROLL PROGRESS
+    ========================================================= */
+    (function() {
+      const bar = document.getElementById('scrollProg');
+      if (!bar) return;
+      let raf = null;
+      window.addEventListener('scroll', () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const total = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (total > 0 ? (window.scrollY / total * 100) : 0).toFixed(2) + '%';
+          raf = null;
+        });
+      }, { passive: true });
+    })();
+
+    /* =========================================================
+       NAV ACTIVE SECTION
+    ========================================================= */
+    (function() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      if (!sections.length || !navLinks.length) return;
+
+      const sectionObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const id = '#' + e.target.id;
+            navLinks.forEach(a => a.classList.toggle('nav-active', a.getAttribute('href') === id));
+          }
+        });
+      }, { threshold: 0, rootMargin: '-15% 0px -70% 0px' });
+
+      sections.forEach(s => sectionObs.observe(s));
+    })();
+
+    /* =========================================================
+       PORTFOLIO STAT COUNT-UP
+    ========================================================= */
+    (function() {
+      const stat = document.querySelector('.port-stat em');
+      if (!stat) return;
+      const target = parseInt(stat.textContent, 10);
+      if (isNaN(target) || target === 0) return;
+      let started = false;
+
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !started) {
+          started = true; obs.disconnect();
+          const duration = 720;
+          const start = performance.now();
+          (function tick(now) {
+            const t  = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3); /* ease-out-cubic */
+            stat.textContent = String(Math.round(eased * target)).padStart(2, '0');
+            if (t < 1) requestAnimationFrame(tick);
+          })(performance.now());
+        }
+      }, { threshold: .8 });
+
+      const anchor = stat.closest('.port-stat') || stat;
+      obs.observe(anchor);
+    })();
+
+    /* =========================================================
+       FOOTER YEAR — always current
+    ========================================================= */
+    (function() {
+      const copy = document.querySelector('.footer-copy');
+      if (copy) copy.innerHTML = copy.innerHTML.replace(/\b20\d{2}\b/, new Date().getFullYear());
+    })();
+
+    /* =========================================================
+       DEVELOPER CONSOLE EASTER EGG
+       Discovered only by those who open DevTools — zero visual noise.
+    ========================================================= */
+    (function() {
+      const s = [
+        ['%c E N D O C O R ', 'font-size:13px;letter-spacing:6px;color:#8DA67A;background:#1B232B;padding:10px 22px;font-family:monospace;border-radius:2px'],
+        ['%c Diseño Web · México · Est. 2024\n', 'color:#5B6670;font-size:11px;font-family:monospace'],
+        ['%c¿Curioso/a por el código? Construimos sitios precisos.\nendocor.co@gmail.com', 'color:#8896A2;font-size:11px;font-family:monospace']
+      ];
+      s.forEach(([msg, style]) => console.log(msg, style));
     })();
 
   </script>
