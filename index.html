@@ -30,6 +30,7 @@
       --font-b: 'Outfit', sans-serif;
       --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
       --sat: env(safe-area-inset-top,    0px);
       --sar: env(safe-area-inset-right,  0px);
       --sab: env(safe-area-inset-bottom, 0px);
@@ -332,6 +333,7 @@
       display: block;
       mix-blend-mode: multiply;
       image-rendering: -webkit-optimize-contrast;
+      animation: logoBreath 9s ease-in-out 2.5s infinite;
     }
 
     .hero-brand {
@@ -344,6 +346,18 @@
       animation: riseIn 1s var(--ease) .5s forwards;
     }
     .hero-brand em { color: var(--sage); font-style: normal; }
+
+    /* Per-letter float wave on hover */
+    .hero-brand > * { display: inline-block; transition: transform .55s var(--spring); }
+    @media (hover: hover) and (pointer: fine) {
+      .hero-brand:hover > *:nth-child(1) { transform: translateY(-6px); transition-delay: .00s; }
+      .hero-brand:hover > *:nth-child(2) { transform: translateY(-6px); transition-delay: .04s; }
+      .hero-brand:hover > *:nth-child(3) { transform: translateY(-6px); transition-delay: .08s; }
+      .hero-brand:hover > *:nth-child(4) { transform: translateY(-6px); transition-delay: .12s; }
+      .hero-brand:hover > *:nth-child(5) { transform: translateY(-6px); transition-delay: .16s; }
+      .hero-brand:hover > *:nth-child(6) { transform: translateY(-6px); transition-delay: .20s; }
+      .hero-brand:hover > *:nth-child(7) { transform: translateY(-6px); transition-delay: .24s; }
+    }
 
     /* Refined divider — wider, double-line feel */
     .hero-divider {
@@ -362,6 +376,31 @@
       background: var(--sage); opacity: .7;
     }
     @keyframes lineGrow { to { width: clamp(180px, 28vw, 340px); } }
+
+    /* ======================================================
+       HERO SCROLL LAYER — parallax fade wrapper
+    ====================================================== */
+    .hero-scroll-layer {
+      position: relative; z-index: 10;
+      width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      will-change: transform, opacity;
+    }
+
+    /* Mouse-follow spotlight */
+    .hero-spotlight {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(
+        circle 400px at var(--mx, 50%) var(--my, 42%),
+        rgba(255,255,255,.14)       0%,
+        rgba(163,177,138,.04)      50%,
+        transparent                72%
+      );
+      opacity: 0;
+      transition: opacity 1.8s ease;
+    }
+    .hero.light-on .hero-spotlight { opacity: 1; }
+    @media (hover: none) { .hero-spotlight { display: none; } }
 
     .hero-title {
       font-size: clamp(.88rem, 1.8vw, 1.1rem);
@@ -385,6 +424,10 @@
       animation: riseIn .8s var(--ease) 1.35s forwards;
     }
     @keyframes riseIn { to { opacity: 1; transform: translateY(0); } }
+    @keyframes logoBreath {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.009); }
+    }
 
     /* Bottom metadata strip — grounds the hero cinematically */
     .hero-meta {
@@ -413,6 +456,20 @@
       transition: box-shadow .35s var(--ease), transform .15s;
       -webkit-tap-highlight-color: transparent;
     }
+    /* Shimmer sweep */
+    .btn-primary::before {
+      content: '';
+      position: absolute; top: 0; left: -140%;
+      width: 48%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.13), transparent);
+      transform: skewX(-22deg);
+      z-index: 2; pointer-events: none;
+    }
+    .btn-primary:hover::before {
+      left: 220%;
+      transition: left .72s var(--ease);
+    }
+    /* Dark fill */
     .btn-primary::after {
       content: ''; position: absolute; inset: 0; background: var(--petrol);
       transform: scaleX(0); transform-origin: right;
@@ -421,7 +478,7 @@
     .btn-primary:hover { box-shadow: 0 8px 28px rgba(27,35,43,.2); }
     .btn-primary:hover::after { transform: scaleX(1); transform-origin: left; }
     .btn-primary:active { transform: scale(.97); }
-    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary span { position: relative; z-index: 3; }
 
     .btn-outline {
       display: inline-flex; align-items: center; justify-content: center;
@@ -860,6 +917,11 @@
     <div class="hero-corner hero-corner-bl" aria-hidden="true"></div>
     <div class="hero-corner hero-corner-br" aria-hidden="true"></div>
 
+    <!-- Mouse-follow spotlight -->
+    <div class="hero-spotlight" aria-hidden="true"></div>
+
+    <!-- Scroll parallax layer -->
+    <div class="hero-scroll-layer" id="heroScrollLayer">
     <div class="hero-content">
       <div class="hero-logo-wrap">
         <img
@@ -870,7 +932,7 @@
         >
       </div>
 
-      <h1 class="hero-brand">ENDOC<em>O</em>R</h1>
+      <h1 class="hero-brand"><span>E</span><span>N</span><span>D</span><span>O</span><span>C</span><em>O</em><span>R</span></h1>
       <div class="hero-divider" aria-hidden="true"></div>
       <p class="hero-title">Diseño Web Premium y Presencia Digital Moderna</p>
       <p class="hero-sub">Experiencias digitales que comunican distinción, confianza y valor desde el primer instante.</p>
@@ -879,6 +941,7 @@
         <a href="#portfolio" class="btn-outline">Ver Portafolio</a>
       </div>
     </div>
+    </div><!-- /.hero-scroll-layer -->
 
     <!-- Cinematic metadata strip -->
     <div class="hero-meta" aria-hidden="true">
@@ -1419,6 +1482,93 @@
       portGrid.appendChild(card);
       revObs.observe(card);
     });
+
+    /* =========================================================
+       HERO POLISH — parallax, spotlight, 3D tilt, magnetic CTAs
+    ========================================================= */
+    (function heroPolish() {
+      const heroEl     = document.getElementById('hero');
+      const scrollLyr  = document.getElementById('heroScrollLayer');
+      const isDesktop  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const lessMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!heroEl) return;
+
+      /* -- Scroll parallax + fade -- */
+      if (!lessMotion && scrollLyr) {
+        let raf = null;
+        window.addEventListener('scroll', () => {
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            const p = Math.min(window.scrollY / window.innerHeight, 1);
+            scrollLyr.style.transform = `translateY(${(p * 44).toFixed(1)}px)`;
+            scrollLyr.style.opacity   = Math.max(0, 1 - p * 1.9).toFixed(3);
+            raf = null;
+          });
+        }, { passive: true });
+      }
+
+      if (!isDesktop || lessMotion) return;
+
+      /* -- Mouse spotlight -- */
+      heroEl.addEventListener('mouseenter', () => heroEl.classList.add('light-on'));
+      heroEl.addEventListener('mouseleave', () => heroEl.classList.remove('light-on'));
+      heroEl.addEventListener('mousemove', e => {
+        const r = heroEl.getBoundingClientRect();
+        heroEl.style.setProperty('--mx', ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%');
+        heroEl.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%');
+      }, { passive: true });
+
+      /* -- 3D content tilt (max ±1.5°) -- */
+      const content = document.querySelector('.hero-content');
+      let tiltReady = false;
+      setTimeout(() => { tiltReady = true; }, 2800);
+
+      heroEl.addEventListener('mousemove', e => {
+        if (!tiltReady || !content) return;
+        const r  = heroEl.getBoundingClientRect();
+        const dx = ((e.clientX - r.left) / r.width  - .5) * 2;
+        const dy = ((e.clientY - r.top)  / r.height - .5) * 2;
+        content.style.transition = 'transform .08s linear';
+        content.style.transform  =
+          `perspective(900px) rotateX(${(-dy * 1.5).toFixed(2)}deg) rotateY(${(dx * 1.5).toFixed(2)}deg)`;
+      }, { passive: true });
+
+      heroEl.addEventListener('mouseleave', () => {
+        if (!content) return;
+        content.style.transition = 'transform .8s cubic-bezier(0.25,0.46,0.45,0.94)';
+        content.style.transform  = '';
+        setTimeout(() => { content.style.transition = ''; }, 800);
+      });
+
+      /* -- Magnetic CTA buttons -- */
+      document.querySelectorAll('.hero-cta .btn-primary, .hero-cta .btn-outline').forEach(btn => {
+        let isPressed = false;
+
+        btn.addEventListener('mousemove', e => {
+          const r  = btn.getBoundingClientRect();
+          const dx = (e.clientX - r.left - r.width  / 2) * .24;
+          const dy = (e.clientY - r.top  - r.height / 2) * .24;
+          const sc = isPressed ? ' scale(.97)' : '';
+          btn.style.transition = 'transform .1s ease, box-shadow .3s ease';
+          btn.style.transform  = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px)${sc}`;
+        });
+
+        btn.addEventListener('mousedown', () => {
+          isPressed = true;
+          btn.style.transform = btn.style.transform.replace(' scale(.97)', '') + ' scale(.97)';
+        });
+        btn.addEventListener('mouseup', () => {
+          isPressed = false;
+          btn.style.transform = btn.style.transform.replace(' scale(.97)', '');
+        });
+        btn.addEventListener('mouseleave', () => {
+          isPressed = false;
+          btn.style.transition = 'transform .55s cubic-bezier(0.34,1.56,0.64,1), box-shadow .3s ease';
+          btn.style.transform  = '';
+          setTimeout(() => { btn.style.transition = ''; }, 550);
+        });
+      });
+    })();
 
     /* Tap anywhere on card to open site — mobile only */
     if (window.matchMedia('(hover: none)').matches) {
