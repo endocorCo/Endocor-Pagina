@@ -651,13 +651,53 @@
       touch-action: manipulation;
     }
 
-    /* Screenshot thumbnail */
+    /* ---- Loading skeleton shimmer ---- */
+    @keyframes portShimmer {
+      0%   { transform: translateX(-110%) skewX(-8deg); }
+      100% { transform: translateX(260%)  skewX(-8deg); }
+    }
+    .port-skeleton {
+      position: absolute; inset: 0; z-index: 3;
+      background: linear-gradient(135deg, var(--surface-2) 0%, #edf0f3 50%, var(--surface-2) 100%);
+      overflow: hidden; pointer-events: none;
+      transition: opacity .6s var(--ease);
+    }
+    .port-skeleton::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0; left: 0; width: 55%;
+      background: linear-gradient(
+        90deg,
+        transparent    0%,
+        rgba(255,255,255,.36) 50%,
+        transparent   100%
+      );
+      animation: portShimmer 1.9s ease-in-out infinite;
+    }
+    .port-skeleton.gone { opacity: 0; }
+
+    /* Screenshot thumbnail — starts hidden, reveals on entry + image load */
     .port-thumb {
       position: absolute; inset: 0;
       background-size: cover; background-position: center top;
-      transition: transform .82s var(--ease);
+      opacity: 0;
+      transform: translateY(10px) scale(1.04);
+      transition: transform .95s var(--ease-out), opacity .7s ease;
+      will-change: transform, opacity;
     }
-    .port-card:hover .port-thumb { transform: scale(1.045); }
+    /* Slide into resting position when card enters viewport */
+    .port-card.in .port-thumb {
+      transform: translateY(0) scale(1);
+    }
+    /* Cross-fade from skeleton once image has loaded */
+    .port-thumb.img-ready {
+      opacity: 1;
+    }
+    /* Hover: scale up + dim for overlay contrast */
+    .port-card:hover .port-thumb {
+      transform: translateY(0) scale(1.05);
+      filter: brightness(.82) saturate(1.04);
+      transition: transform .85s var(--ease), filter .42s ease, opacity .7s ease;
+    }
 
     /* Always-visible info strip */
     .port-info {
@@ -693,44 +733,59 @@
       position: absolute; inset: 0; z-index: 5;
       background: linear-gradient(
         to top,
-        rgba(27,35,43,.93) 0%,
-        rgba(27,35,43,.66) 44%,
-        rgba(27,35,43,.14) 74%,
-        transparent       100%
+        rgba(27,35,43,.96) 0%,
+        rgba(27,35,43,.72) 42%,
+        rgba(27,35,43,.18) 70%,
+        transparent        100%
       );
       display: flex; flex-direction: column; justify-content: flex-end;
       padding: 28px;
-      opacity: 0; transform: translateY(4px);
-      transition: opacity .38s var(--ease), transform .38s var(--ease);
+      opacity: 0;
+      transition: opacity .42s var(--ease);
       pointer-events: none;
     }
-    .port-card:hover .port-hover { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .port-card:hover .port-hover { opacity: 1; pointer-events: auto; }
+
+    /* Thin sage rule above overlay text — draws in on hover */
+    .port-hover::before {
+      content: '';
+      position: absolute; bottom: 82px; left: 28px; right: 28px; height: 1px;
+      background: linear-gradient(90deg, rgba(141,166,122,.5), rgba(141,166,122,.12));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .55s var(--ease) .08s;
+    }
+    .port-card:hover .port-hover::before { transform: scaleX(1); }
 
     .port-hover-cat {
       font-size: .53rem; letter-spacing: .44em; text-transform: uppercase;
-      color: var(--sage-l); margin-bottom: 7px;
-      opacity: 0; transform: translateY(8px);
-      transition: opacity .35s var(--ease), transform .35s var(--ease);
+      color: var(--sage-l); margin-bottom: 8px;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .38s var(--ease), transform .38s var(--ease);
     }
     .port-hover-title {
       font-family: var(--font-d); font-size: clamp(.9rem, 1.8vw, 1.18rem);
-      letter-spacing: .08em; color: #F8FAFC; margin-bottom: 20px;
-      opacity: 0; transform: translateY(8px);
-      transition: opacity .35s var(--ease), transform .35s var(--ease);
+      letter-spacing: .08em; color: #F8FAFC; margin-bottom: 22px;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .38s var(--ease), transform .38s var(--ease);
     }
     .port-hover-link {
       display: inline-flex; align-items: center; gap: 9px;
       font-size: .63rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
       color: var(--sage-l);
-      opacity: 0; transform: translateY(8px);
-      transition: opacity .35s var(--ease), transform .35s var(--ease), gap .3s var(--ease);
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .38s var(--ease), transform .38s var(--ease), gap .32s var(--ease);
     }
-    .port-hover-link:hover { gap: 15px; }
+    .port-hover-link:hover { gap: 16px; }
+    /* Arrow nudge on link hover */
+    .port-hover-link svg {
+      transition: transform .28s var(--spring);
+    }
+    .port-hover-link:hover svg { transform: translateX(4px); }
 
-    /* Staggered entrance on hover */
-    .port-card:hover .port-hover-cat   { opacity: 1; transform: translateY(0); transition-delay: .05s; }
-    .port-card:hover .port-hover-title { opacity: 1; transform: translateY(0); transition-delay: .10s; }
-    .port-card:hover .port-hover-link  { opacity: 1; transform: translateY(0); transition-delay: .16s; }
+    /* Staggered entrance — tighter, snappier */
+    .port-card:hover .port-hover-cat   { opacity: 1; transform: translateY(0); transition-delay: .06s; }
+    .port-card:hover .port-hover-title { opacity: 1; transform: translateY(0); transition-delay: .12s; }
+    .port-card:hover .port-hover-link  { opacity: 1; transform: translateY(0); transition-delay: .19s; }
 
     /* Top accent line — draws across on hover */
     .port-card::before {
@@ -955,9 +1010,18 @@
       .srv-card:hover   { transform: none; box-shadow: none; }
       .contact-card:hover { transform: none; box-shadow: 0 2px 8px rgba(27,35,43,.05); }
       .contact-card:hover::before { transform: scaleX(0); }
-      .port-card:hover .port-thumb  { transform: none; }
+      .port-card:hover .port-thumb  { transform: translateY(0) scale(1); filter: none; }
       .port-card:hover::before      { transform: scaleX(0); }
       .port-slot:hover              { background: var(--surface); }
+      /* Tactile press response on touch */
+      .port-card:active {
+        transform: scale(.972);
+        transition: transform .12s ease;
+      }
+      .port-card:active .port-thumb {
+        transform: translateY(0) scale(1.022) !important;
+        transition: transform .12s ease !important;
+      }
       .btn-primary:hover::after { transform: scaleX(0); }
       .btn-primary:hover { box-shadow: none; }
       .btn-outline:hover { border-color: var(--border-m); color: var(--petrol); }
@@ -1566,11 +1630,12 @@
       card.className = `port-card rev ${delay}`;
       card.setAttribute('aria-label', `${proj.title} — ${proj.category}`);
 
-      /* thum.io: live screenshot thumbnail, no API key needed */
-      const thumb = `https://image.thum.io/get/width/1200/crop/750/noanimate/${proj.url}`;
+      /* thum.io: live screenshot, no API key needed */
+      const thumbUrl = `https://image.thum.io/get/width/1200/crop/750/noanimate/${proj.url}`;
 
       card.innerHTML = `
-        <div class="port-thumb" style="background-image:url('${thumb}')"></div>
+        <div class="port-thumb"></div>
+        <div class="port-skeleton"></div>
         <div class="port-info">
           <span class="port-index">${num}</span>
           <span class="port-info-name">${proj.title}</span>
@@ -1589,6 +1654,30 @@
 
       portGrid.appendChild(card);
       revObs.observe(card);
+
+      /* Image load detection — skeleton → crossfade reveal */
+      (function loadThumb(c, url) {
+        const thumbEl = c.querySelector('.port-thumb');
+        const skelEl  = c.querySelector('.port-skeleton');
+
+        /* Set bg-image immediately so browser starts fetch */
+        thumbEl.style.backgroundImage = `url('${url}')`;
+
+        /* Use hidden <img> to detect CSS bg-image cache hit */
+        const probe = new Image();
+        probe.onload = function() {
+          thumbEl.classList.add('img-ready');
+          /* Short tick so opacity transition fires after class is painted */
+          requestAnimationFrame(() => {
+            setTimeout(() => skelEl.classList.add('gone'), 80);
+          });
+        };
+        probe.onerror = function() {
+          /* Fail gracefully — hide skeleton, show empty surface */
+          skelEl.classList.add('gone');
+        };
+        probe.src = url;
+      })(card, thumbUrl);
     });
 
     /* =========================================================
