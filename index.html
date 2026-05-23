@@ -418,7 +418,7 @@
         transparent                72%
       );
       opacity: 0;
-      transition: opacity 1.8s ease;
+      transition: opacity 1.8s var(--ease);
     }
     .hero.light-on .hero-spotlight { opacity: 1; }
     @media (hover: none) { .hero-spotlight { display: none; } }
@@ -474,7 +474,7 @@
       font-family: var(--font-b);
       font-size: .77rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;
       position: relative; overflow: hidden;
-      transition: box-shadow .35s var(--ease), transform .15s;
+      transition: box-shadow .35s var(--ease), transform .15s var(--ease-out);
       -webkit-tap-highlight-color: transparent;
     }
     /* Shimmer sweep */
@@ -498,7 +498,6 @@
     }
     .btn-primary:hover { box-shadow: 0 8px 28px rgba(27,35,43,.2); }
     .btn-primary:hover::after { transform: scaleX(1); transform-origin: left; }
-    .btn-primary:active { transform: scale(.97); }
     .btn-primary span { position: relative; z-index: 3; }
 
     .btn-outline {
@@ -507,11 +506,10 @@
       padding: 14px 44px; border: 1px solid var(--border-m); color: var(--petrol);
       font-family: var(--font-b);
       font-size: .77rem; font-weight: 400; letter-spacing: .13em; text-transform: uppercase;
-      transition: border-color .3s, color .3s, transform .15s;
+      transition: border-color .3s, color .3s, transform .15s var(--ease-out);
       -webkit-tap-highlight-color: transparent;
     }
     .btn-outline:hover { border-color: var(--navy); color: var(--navy); }
-    .btn-outline:active { transform: scale(.97); }
 
     /* ======================================================
        TICKER
@@ -817,7 +815,7 @@
     }
     .port-hover-title {
       font-family: var(--font-d); font-size: clamp(.9rem, 1.8vw, 1.18rem);
-      letter-spacing: .08em; color: #F8FAFC; margin-bottom: 22px;
+      letter-spacing: .08em; color: var(--bg); margin-bottom: 22px;
       opacity: 0; transform: translateY(10px);
       transition: opacity .38s var(--ease), transform .38s var(--ease);
     }
@@ -930,7 +928,7 @@
     }
     .why-quote {
       font-family: var(--font-d); font-size: clamp(var(--t-base), 1.8vw, 1.12rem);
-      letter-spacing: .05em; line-height: 1.58; color: #F8FAFC;
+      letter-spacing: .05em; line-height: 1.58; color: var(--bg);
       margin-bottom: 32px; position: relative; z-index: 1;
       text-wrap: balance; font-kerning: normal;
     }
@@ -982,7 +980,7 @@
       background: var(--navy);
     }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .footer-logo { font-family: var(--font-d); font-size: .92rem; letter-spacing: .32em; color: #F8FAFC; flex-shrink: 0; }
+    .footer-logo { font-family: var(--font-d); font-size: .92rem; letter-spacing: .32em; color: var(--bg); flex-shrink: 0; }
     .footer-logo em { color: var(--sage-l); font-style: normal; }
     .footer-copy { font-size: .68rem; color: rgba(167,176,184,.6); letter-spacing: .1em; }
     .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
@@ -1449,9 +1447,9 @@
           <div class="why-card">
             <div class="why-card-bg"></div>
             <div class="why-quote">
-              "Creemos que el diseño premium no es un lujo — es una <em>inversión estratégica</em> que separa a las marcas que perduran del resto."
+              "Creemos que el diseño premium no es un lujo: es una <em>inversión estratégica</em> que separa a las marcas que perduran del resto."
             </div>
-            <div class="why-meta">— ENDOCOR</div>
+            <div class="why-meta">· ENDOCOR</div>
           </div>
         </div>
       </div>
@@ -1466,8 +1464,8 @@
       <div class="contact-inner">
         <div class="rev rv-blur">
           <div class="tag" style="justify-content:center;margin-bottom:22px">Hablemos</div>
-          <h2 class="contact-h">¿Listo para<em>Empezar?</em></h2>
-          <p class="contact-sub">Cuéntanos sobre tu proyecto y te respondemos en menos de 24 horas.<br>Sin compromisos — solo resultados bien pensados.</p>
+          <h2 class="contact-h">¿Listo para <em>Empezar?</em></h2>
+          <p class="contact-sub">Cuéntanos sobre tu proyecto y te respondemos en menos de 24 horas.<br>Sin compromisos, solo resultados bien pensados.</p>
         </div>
         <div class="contact-grid rev d2">
 
@@ -1508,7 +1506,7 @@
     <div class="container">
       <div class="footer-inner">
         <a href="#" class="footer-logo" aria-label="ENDOCOR — Volver al inicio">ENDOC<em>O</em>R</a>
-        <p class="footer-copy">© 2025 ENDOCOR. Todos los derechos reservados.</p>
+        <p class="footer-copy">© 2026 ENDOCOR. Todos los derechos reservados.</p>
         <ul class="footer-links" role="list">
           <li><a href="#about">Nosotros</a></li>
           <li><a href="#services">Servicios</a></li>
